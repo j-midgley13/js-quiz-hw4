@@ -122,11 +122,56 @@ function pickAnswer(event) {
          startQuestions();
             if (liCount === questionArray.length) {
                 
-                // resultsDisplay();
+            resultsDisplay();
+
             }
             liCount ++;
     }
 }
+
+function resultsDisplay() {
+    stopTimer();
+    question.remove();
+    rightWrong.remove();
+
+    var congratsEL = document.createElement("h3");
+    congratsEL.innerHTML = "You made it!";
+    questionDiv.append(congratsEL);
+
+    var endScore = document.createElement("p");
+    endScore.innerHTML = "Final score: " + score + "/5";
+    questionDiv.append(endScore);
+
+    var formEl = document.createElement("form");
+    var fieldsetEl = document.createElement("fieldset");
+    var formDiv = document.createElement("div");
+    var labelEl = document.createElement("label");
+    var inputEl = document.createElement("input");
+    var submitBtn = document.createElement("button");
+
+    formDiv.setAttribute("class", "form-group");
+
+    labelEl.setAttribute("for", "TextInput");
+    labelEl.textContent = "Enter initials below:"
+
+    inputEl.setAttribute("type", "text");
+    inputEl.setAttribute("id", "TextInput");
+    inputEl.setAttribute("class", "form-control");
+    inputEl.setAttribute("placeholder", "Initials");
+
+    submitBtn.setAttribute("type", "submit");
+    submitBtn.setAttribute("class", "btn btn-dark");
+    submitBtn.textContent = "Submit";
+    
+    questionDiv.append(formEl);
+    formEl.append(fieldsetEl);
+    fieldsetEl.append(formDiv);
+    formDiv.append(labelEl);
+    formDiv.append(inputEl);
+    fieldsetEl.append(submitBtn);
+         
+}
+    
 
 
 

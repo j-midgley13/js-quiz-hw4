@@ -23,9 +23,12 @@ header {
     margin-top: 10%;
 } 
 
-button {
-    margin-left: auto;
-    margin-right: auto;
+#fun {
+    text-align: center;
+}
+
+#startbtn {
+    text-align: center;
 }
 
 #box {
@@ -34,11 +37,14 @@ button {
     border-color: #5EEAD7;
 }
 
+ul {
+  padding-inline-start: 0;  
+}
+
 #inside-div {
     padding: 10px;
 }
 
 #question-display {
-    margin-left: 40px;
     text-align: center;
 }
