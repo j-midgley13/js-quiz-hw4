@@ -2,12 +2,17 @@ var content = document.getElementById("content");
 var h4 = document.getElementById("fun");
 var startBtn = document.getElementById("startbtn");
 var timer = document.getElementById("timer");
+var scoreDisplay = document.getElementById("score");
 var questionDiv = document.getElementById("question-div");
-var questionsList = document.getElementById("questions");
+var questionsAnswers = document.getElementById("question-answers");
 var question = document.getElementById("question-display");
+var rightWrong = document.getElementById("right-wrong");
 var seconds = 60;
 var interval;
 var i = 0;
+var score = 0;
+var k = 0;
+var liCount = 1;
 
 var questionArray = [
     {
@@ -62,7 +67,6 @@ function stopTimer() {
 // Shows questions and answer options on page
 // Still need to create answer selection function to cycle questions
 function startQuestions(event) {
-    event.preventDefault();
     h4.remove();
     startBtn.remove();
 
@@ -86,8 +90,50 @@ function startQuestions(event) {
 };
 
 
+
+function pickAnswer(event) {
+    event.preventDefault();
+
+    if (event.target.matches("li")) {
+        user = event.target.id;
+        var selectedAnswer = questionArray[k].options[user];
+            if (typeof user !== "undedfined") {
+                rightWrong.innerHTML = "";
+
+                if (selectedAnswer === questionArray[k].a) {
+                    rightWrong.innerHTML = "Correct!";
+                    rightWrong.style.fontStyle = "italic";
+                    scoreDisplay.textContent = ("Score: " + (score + 1)  + "/5")
+                    score++;
+                    console.log(score)
+                }
+
+                else {
+                    seconds = seconds - 5;
+                    rightWrong.innerHTML = "Wrong!";
+                    rightWrong.style.fontStyle = "italic";
+                    
+                }
+                
+                k++;
+                
+            }
+            
+         startQuestions();
+            if (liCount === questionArray.length) {
+                
+                // resultsDisplay();
+            }
+            liCount ++;
+    }
+}
+
+
+
+
     
     
 
 startBtn.addEventListener("click", startTimer);
 startBtn.addEventListener("click", startQuestions);
+questionsAnswers.addEventListener("click", pickAnswer);
