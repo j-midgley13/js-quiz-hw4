@@ -9,11 +9,11 @@ var seconds = 60;
 var interval;
 var i = 0;
 
-var arrayQuestions = [
+var questionArray = [
     {
         q: "What HTML element does JavaScript live in?",
-        options: ["<body>", "<div>", "<script>"],
-        a: "<script>"
+        options: ["&lt;body&gt;", "&lt;div&gt;", "&lt;script&gt;"],
+        a: "&lt;script&gt;"
     },
 
     {
@@ -41,6 +41,7 @@ var arrayQuestions = [
     },
 ]
 
+// Starts timer countdown
 function startTimer() {
     interval = setInterval( function() {
         seconds --;
@@ -49,6 +50,7 @@ function startTimer() {
         if (seconds < 0){
             stopTimer();
             alert("Gotta be quicker than that!");
+            timer.innerHTML = ("Timer: 60")
         }
     }, 1000);
 };
@@ -57,5 +59,35 @@ function stopTimer() {
     clearInterval(interval);
 };
 
+// Shows questions and answer options on page
+// Still need to create answer selection function to cycle questions
+function startQuestions(event) {
+    event.preventDefault();
+    h4.remove();
+    startBtn.remove();
+
+    if(questionArray[i] !== undefined) {
+        question.textContent = questionArray[i].q;       
+            for(var j = 0; j < questionArray[i].options.length; j++){
+                var li = document.createElement("li");
+                li.innerHTML = questionArray[i].options[j];
+                li.setAttribute("id", j);
+                li.style.listStyleType = "none";
+                li.style.borderStyle = "solid";
+                li.style.borderColor = "#5EEAD7";
+                li.style.marginTop = "2px";
+                li.style.marginBottom = "2px";
+                li.style.textAlign = "center";
+                question.append(li);
+
+            }
+     i++;    
+    }
+};
+
+
+    
+    
+
 startBtn.addEventListener("click", startTimer);
-// startBtn.addEventListener("click", startQuestions);
+startBtn.addEventListener("click", startQuestions);

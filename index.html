@@ -15,11 +15,17 @@
   </head>
   <body>
     <header>
-      <h1>Welcome to JavaScript Quiz!</h1>
+      <h1 class = "title">Welcome to JavaScript Quiz!</h1>
       <br>
-      <p id="timer">
-        Timer: 60
-      </p>
+      <div class="float">
+        <p id="timer">
+          Timer: 60
+        </p>
+        <p id="score" >
+          Score: 0/5
+        </p>
+      </div>
+      
     </header>
       
 
@@ -35,8 +41,9 @@
                 <br>
                 <button id="startbtn" type="submit" class="btn btn-dark" >Start Quiz!</button>
                 <div id="question-div">
+                  <h5 id="question-display"></h5>
                   <ul id="questions">
-                    <h1 id="question-display"></h1>
+                    
                   </ul>
                 </div>
               </div>  
