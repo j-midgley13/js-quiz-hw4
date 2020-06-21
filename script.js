@@ -1,3 +1,4 @@
+// Global Vars, mostly getting html elements
 var content = document.getElementById("content");
 var h4 = document.getElementById("fun");
 var startBtn = document.getElementById("startbtn");
@@ -67,7 +68,6 @@ function stopTimer() {
 };
 
 // Shows questions and answer options on page
-// Still need to create answer selection function to cycle questions
 function startQuestions(event) {
     h4.remove();
     startBtn.remove();
@@ -92,7 +92,7 @@ function startQuestions(event) {
 };
 
 
-
+// Cycles through questions and returns right and wrong answers
 function pickAnswer(event) {
     event.preventDefault();
 
@@ -131,6 +131,7 @@ function pickAnswer(event) {
     }
 }
 
+// Clears questions divs and shows form to submit score
 function resultsDisplay() {
     stopTimer();
     question.remove();
@@ -163,6 +164,7 @@ function resultsDisplay() {
 
     submitBtn.setAttribute("type", "submit");
     submitBtn.setAttribute("class", "btn btn-dark");
+    submitBtn.setAttribute("id", "submitBtn");
     submitBtn.textContent = "Submit";
     
     questionDiv.append(formEl);
@@ -171,35 +173,28 @@ function resultsDisplay() {
     formDiv.append(labelEl);
     formDiv.append(inputEl);
     fieldsetEl.append(submitBtn);
-
-    submitBtn.addEventListener("click", function (event) {
-        event.preventDefault();
-
-        congratsEL.textContent = "";
-        endScore.textContent = "";
-        formEl.textContent = "";
-        var hsDiv = document.createElement("div");
-        var highScore = document.createElement("h3");
-        highScore.innerHTML = "High Score";
-        questionDiv.append(hsDiv);
-        hsDiv.append(highScore);
-
-        var userInit = document.getElementById("TextInput");
-
-        localStorage.setItem("initals", JSON.stringify(userInit));
-        localStorage.setItem("score", JSON.stringify(score));
-
-        
-
-
-        
-
-    });
          
 };
 
+// Grabs score and initials for local storage
+document.addEventListener("click",function(event){
+    event.preventDefault();
+  if(event.target.id === 'submitBtn'){
+     var userInit = document.getElementById("TextInput").value.trim();
+     console.log(userInit);
+     if(userInit === ""){
+         alert("Enter two initials");
+        
+        }
+     }
+localStorage.setItem("TextInput", JSON.stringify(userInit));
+localStorage.setItem("score", JSON.stringify(score));
+     
+});
 
+//Ran out of time, had trouble with JSON and returning it. Something to continue to educate myself on!
 
+// Event listeners to start quiz, timer, and select answers
 startBtn.addEventListener("click", startTimer);
 startBtn.addEventListener("click", startQuestions);
 questionsAnswers.addEventListener("click", pickAnswer);
