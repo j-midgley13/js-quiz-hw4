@@ -7,6 +7,7 @@ var questionDiv = document.getElementById("question-div");
 var questionsAnswers = document.getElementById("question-answers");
 var question = document.getElementById("question-display");
 var rightWrong = document.getElementById("right-wrong");
+
 var seconds = 60;
 var interval;
 var i = 0;
@@ -55,6 +56,7 @@ function startTimer() {
         if (seconds < 0){
             stopTimer();
             alert("Gotta be quicker than that!");
+            window.location.reload();
             timer.innerHTML = ("Timer: 60")
         }
     }, 1000);
@@ -169,16 +171,38 @@ function resultsDisplay() {
     formDiv.append(labelEl);
     formDiv.append(inputEl);
     fieldsetEl.append(submitBtn);
+
+    submitBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        congratsEL.textContent = "";
+        endScore.textContent = "";
+        formEl.textContent = "";
+        var hsDiv = document.createElement("div");
+        var highScore = document.createElement("h3");
+        highScore.innerHTML = "High Score";
+        questionDiv.append(hsDiv);
+        hsDiv.append(highScore);
+
+        var userInit = document.getElementById("TextInput");
+
+        localStorage.setItem("initals", JSON.stringify(userInit));
+        localStorage.setItem("score", JSON.stringify(score));
+
+        
+
+
+        
+
+    });
          
-}
-    
+};
 
 
-
-
-    
-    
 
 startBtn.addEventListener("click", startTimer);
 startBtn.addEventListener("click", startQuestions);
 questionsAnswers.addEventListener("click", pickAnswer);
+
+
+ 
